@@ -2,6 +2,9 @@
 
 **Discord Widget Generator** - Create beautiful, customizable Discord server widget embeds for your website.
 
+<img src="https://github.com/Dx3iZ/FrameCord/blob/main/Cover.png?raw=true"/>
+<img src="https://github.com/Dx3iZ/FrameCord/blob/main/example.png?raw=true" width="300"/>
+
 [![Discord Widget](https://framecord.vercel.app/api/generate?invite=69YUb7k7SU&theme=ocean&format=live)](https://framecord.vercel.app/w/69YUb7k7SU)
 
 ## Features
