@@ -217,10 +217,10 @@ export default function SettingsBar({
 
             <Box p={4} overflowY="auto" maxH="calc(100vh - 280px)" position="relative">
                 {activeSection === "theme" && (
-                <ScrollArea.Root height="20.5rem" variant={"always"} size={"xs"}>
+                <ScrollArea.Root height="22rem" variant={"always"} size={"xs"}>
                 <ScrollArea.Viewport css={{"--scroll-shadow-size": "4rem", maskImage: "linear-gradient(#000, #000)", "&[data-overflow-y]": { maskImage: "linear-gradient(#000,#000,transparent 0,#000 var(--scroll-shadow-size),#000 calc(100% - var(--scroll-shadow-size)),transparent)" }}}>
                 <ScrollArea.Content paddingEnd="3" textStyle="sm">
-                <VStack gap={5} align="stretch">
+                <VStack gap={5} align="stretch" mt={5}>
                         <Box>
                             <Text fontWeight="medium" fontSize="xs" mb={3} color="fg/60" textTransform="uppercase" letterSpacing="wider">Mode</Text>
                             <Grid templateColumns="repeat(2, 1fr)" gap={2}>
@@ -243,10 +243,10 @@ export default function SettingsBar({
                 )}
 
                 {activeSection === "appearance" && (
-                <ScrollArea.Root height="20.5rem" variant={"hover"} size={"xs"}>
+                <ScrollArea.Root height="22rem" variant={"always"} size={"xs"}>
                 <ScrollArea.Viewport css={{"--scroll-shadow-size": "4rem", maskImage: "linear-gradient(#000, #000)", "&[data-overflow-y]": { maskImage: "linear-gradient(#000,#000,transparent 0,#000 var(--scroll-shadow-size),#000 calc(100% - var(--scroll-shadow-size)),transparent)" }}}>
                 <ScrollArea.Content paddingEnd="3" textStyle="sm">
-                    <VStack gap={5} align="stretch">
+                <VStack gap={5} align="stretch" mt={5}>
                         <Box>
                             <Text fontWeight="medium" fontSize="xs" mb={3} color="fg/60" textTransform="uppercase" letterSpacing="wider">Border Radius</Text>
                             <VStack gap={4} align="stretch">
@@ -274,10 +274,10 @@ export default function SettingsBar({
                 )}
 
                 {activeSection === "content" && (
-                <ScrollArea.Root height="20.5rem" variant={"always"} size={"xs"}>
+                <ScrollArea.Root height="22rem" variant={"always"} size={"xs"}>
                 <ScrollArea.Viewport css={{"--scroll-shadow-size": "4rem", maskImage: "linear-gradient(#000, #000)", "&[data-overflow-y]": { maskImage: "linear-gradient(#000,#000,transparent 0,#000 var(--scroll-shadow-size),#000 calc(100% - var(--scroll-shadow-size)),transparent)" }}}>
                 <ScrollArea.Content paddingEnd="3" textStyle="sm">
-                <VStack gap={5} align="stretch">
+                <VStack gap={5} align="stretch" mt={5}>
                     <Box>
                         <Text fontWeight="medium" fontSize="xs" mb={3} color="fg/60" textTransform="uppercase" letterSpacing="wider">Widget Content</Text>
                         <Grid gap={2} templateColumns="repeat(2, 1fr)">
