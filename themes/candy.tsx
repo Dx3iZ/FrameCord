@@ -85,19 +85,16 @@ export default function CandyTheme({
       
       <HStack gap={4} align="center">
         {/* Candy icon */}
-        {(banner || icon) && (
+        {icon && (
           <Box position="relative" flexShrink={0}>
             <Box
               w="14"
               h="14"
               rounded={logoRadiusPx}
               overflow="hidden"
-              borderWidth="3px"
-              borderColor="white"
-              boxShadow="0 8px 25px rgba(236, 72, 153, 0.3)"
             >
               <Image
-                src={banner || icon}
+                src={icon}
                 alt={name}
                 w="full"
                 h="full"

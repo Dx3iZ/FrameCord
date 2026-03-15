@@ -136,7 +136,7 @@ export default function AnimatedTheme({
       <HStack gap={5} align="center" position="relative" zIndex={1}>
         {/* Icon with glow effect */}
         <Box position="relative">
-          {(banner || icon) && (
+          {icon && (
             <MotionBox
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -148,12 +148,9 @@ export default function AnimatedTheme({
                 h="16"
                 rounded={logoRadiusPx}
                 overflow="hidden"
-                boxShadow={`0 0 30px ${accentColor}60`}
-                borderWidth="3px"
-                borderColor="whiteAlpha.300"
               >
                 <Image
-                  src={banner || icon}
+                  src={icon}
                   alt={name}
                   w="full"
                   h="full"
@@ -161,7 +158,7 @@ export default function AnimatedTheme({
                 />
               </Box>
               {/* Animated ring */}
-              <MotionBox
+              {/* <MotionBox
                 position="absolute"
                 inset={-2}
                 rounded={logoRadiusPx}
@@ -176,7 +173,7 @@ export default function AnimatedTheme({
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-              />
+              /> */}
             </MotionBox>
           )}
         </Box>

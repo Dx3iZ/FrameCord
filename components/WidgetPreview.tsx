@@ -152,7 +152,7 @@ export default function WidgetPreview({
   const ThemeComponent = themeMap[theme] || NeonTheme
 
   return (
-    <Box position="relative" maxW={500} rounded="xl" borderColor="transparent" bg="transparent" w="420px">
+    <Box position="relative" maxW={500} rounded="xl" borderColor="transparent" bg="transparent" w="450px">
       <ThemeComponent {...props} />
     </Box>
   )

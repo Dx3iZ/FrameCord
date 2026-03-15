@@ -85,19 +85,16 @@ export default function NatureTheme({
       
       <HStack gap={4} align="center">
         {/* Icon in leaf frame */}
-        {(banner || icon) && (
+        {icon && (
           <Box position="relative" flexShrink={0}>
             <Box
               w="14"
               h="14"
               rounded={logoRadiusPx}
               overflow="hidden"
-              borderWidth="3px"
-              borderColor={accentColor}
-              boxShadow={`0 0 20px ${accentColor}50`}
             >
               <Image
-                src={banner || icon}
+                src={icon}
                 alt={name}
                 w="full"
                 h="full"

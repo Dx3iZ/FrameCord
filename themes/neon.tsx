@@ -99,9 +99,6 @@ export default function NeonTheme({
           h="24"
           rounded={logoRadiusPx}
           overflow="hidden"
-          borderWidth="2px"
-          borderColor={borderColor}
-          boxShadow={themeMode === "dark" ? `0 0 15px ${buttonColor}50` : "none"}
         >
           <Image src={icon} alt={name} w="full" h="full" objectFit="cover" />
         </Box>)}

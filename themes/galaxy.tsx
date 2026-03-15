@@ -124,35 +124,22 @@ export default function GalaxyTheme({
       
       <HStack gap={4} align="center">
         {/* Icon with cosmic glow */}
-        {(banner || icon) && (
+        {icon && (
           <Box position="relative" flexShrink={0}>
             <Box
               w="14"
               h="14"
               rounded={logoRadiusPx}
               overflow="hidden"
-              borderWidth="2px"
-              borderColor={accentColor}
-              boxShadow={`0 0 25px ${accentColor}50`}
             >
               <Image
-                src={banner || icon}
+                src={icon}
                 alt={name}
                 w="full"
                 h="full"
                 objectFit="cover"
               />
             </Box>
-            {/* Glow effect */}
-            <Box
-              position="absolute"
-              inset={-1}
-              rounded={logoRadiusPx}
-              bg={accentColor}
-              opacity={0.2}
-              filter="blur(8px)"
-              zIndex={-1}
-            />
           </Box>
         )}
 

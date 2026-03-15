@@ -80,7 +80,7 @@ export default function RetroTheme({
       
       <HStack gap={4} align="center">
         {/* Pixel-style icon frame */}
-        {(banner || icon) && (
+        {icon && (
           <Box
             position="relative"
             w="14"
@@ -90,12 +90,10 @@ export default function RetroTheme({
             <Box
               position="absolute"
               inset={-1}
-              borderWidth="2px"
-              borderColor={borderCol}
               transform="rotate(2deg)"
             />
             <Image
-              src={banner || icon}
+              src={icon}
               alt={name}
               w="full"
               h="full"

@@ -111,19 +111,16 @@ export default function GlassTheme({
       
       <HStack gap={5} align="center" position="relative" zIndex={1}>
         {/* Icon with glass reflection */}
-        {(banner || icon) && (
+        {icon && (
           <Box position="relative">
             <Box
               w="16"
               h="16"
               rounded={logoRadiusPx}
               overflow="hidden"
-              borderWidth="2px"
-              borderColor={glassBorder}
-              boxShadow="0 8px 24px rgba(0,0,0,0.2)"
             >
               <Image
-                src={banner || icon}
+                src={icon}
                 alt={name}
                 w="full"
                 h="full"

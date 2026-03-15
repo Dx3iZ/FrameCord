@@ -95,7 +95,7 @@ export default function GradientTheme({
       
       <HStack gap={4} align="center" position="relative" zIndex={1}>
         {/* Icon with gradient border */}
-        {(banner || icon) && (
+        {icon && (
           <Box
             position="relative"
             flexShrink={0}
@@ -107,10 +107,9 @@ export default function GradientTheme({
               overflow="hidden"
               bgGradient={bgGradient}
               p="2px"
-              boxShadow="0 4px 20px rgba(0,0,0,0.2)"
             >
               <Image
-                src={banner || icon}
+                src={icon}
                 alt={name}
                 w="full"
                 h="full"

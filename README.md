@@ -3,7 +3,7 @@
 **Discord Widget Generator** - Create beautiful, customizable Discord server widget embeds for your website.
 
 <p align="center">
-  <img src="https://framecord.vercel.app/api/generate?invite=69YUb7k7SU" width="460" height="220" alt="FrameCord Widget Preview" />
+  <img src="https://framecord.dev/api/generate?invite=discord" width="460" height="220" alt="FrameCord Widget Preview" />
 </p>
 
 ## Features

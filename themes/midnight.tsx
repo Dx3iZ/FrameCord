@@ -125,36 +125,22 @@ export default function MidnightTheme({
       
       <HStack gap={4} align="center" position="relative" zIndex={1}>
         {/* Icon with glow */}
-        {(banner || icon) && (
+        {icon && (
           <Box position="relative" flexShrink={0}>
             <Box
               w="14"
               h="14"
               rounded={logoRadiusPx}
               overflow="hidden"
-              borderWidth="2px"
-              borderColor={accentColor}
-              boxShadow={`0 0 25px ${accentColor}60`}
             >
               <Image
-                src={banner || icon}
+                src={icon}
                 alt={name}
                 w="full"
                 h="full"
                 objectFit="cover"
               />
             </Box>
-            {themeMode === "dark" && (
-              <Box
-                position="absolute"
-                inset={-2}
-                rounded={logoRadiusPx}
-                bg={accentColor}
-                opacity={0.3}
-                filter="blur(8px)"
-                zIndex={-1}
-              />
-            )}
           </Box>
         )}
 

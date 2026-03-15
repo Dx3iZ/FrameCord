@@ -69,7 +69,7 @@ export default function ElegantTheme({
       
       <HStack gap={5} align="center">
         {/* Minimal icon */}
-        {(banner || icon) && (
+        {icon && (
           <Box 
             position="relative" 
             flexShrink={0}
@@ -77,7 +77,7 @@ export default function ElegantTheme({
             h="12"
           >
             <Image
-              src={banner || icon}
+              src={icon}
               alt={name}
               w="full"
               h="full"

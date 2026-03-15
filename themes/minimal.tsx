@@ -115,9 +115,6 @@ export default function MinimalTheme({
               w="14"
               h="14"
               rounded={logoRadiusPx}
-              borderWidth="2px"
-              borderColor={borderCol}
-              boxShadow="lg"
               objectFit="cover"
             />
           </Box>

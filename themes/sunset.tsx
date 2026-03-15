@@ -101,19 +101,16 @@ export default function SunsetTheme({
       
       <HStack gap={4} align="center">
         {/* Icon with sunset glow */}
-        {(banner || icon) && (
+        {icon && (
           <Box position="relative" flexShrink={0}>
             <Box
               w="14"
               h="14"
               rounded={logoRadiusPx}
               overflow="hidden"
-              borderWidth="3px"
-              borderColor={accentColor}
-              boxShadow={`0 0 25px ${accentColor}50`}
             >
               <Image
-                src={banner || icon}
+                src={icon}
                 alt={name}
                 w="full"
                 h="full"
