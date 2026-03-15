@@ -1,6 +1,5 @@
-import { Accordion, Box, Button, CodeBlock, ColorPicker, ColorPickerChannelSlider, createHighlightJsAdapter, Flex, Grid, GridItem, IconButton, parseColor, ScrollArea, Span, Text, VStack } from "@chakra-ui/react";
+import { Accordion, Box, Button, Grid, GridItem, ScrollArea, Text, VStack } from "@chakra-ui/react";
 import { encodeConfig } from "@/lib/config";
-import hljs from "highlight.js/lib/core"
 import { useState } from "react";
 import { RiPaletteLine, RiLayoutMasonryLine, RiCheckboxMultipleLine } from "react-icons/ri";
 import { CheckboxCard } from "@/components/ui/checkbox-card";
@@ -126,12 +125,6 @@ export default function SettingsBar({
 
     const iframeCode = `<iframe src="${widgetPath}" width="460" height="220" frameborder="0" allowtransparency="true"></iframe>`
 
-    const file = {
-      code: iframeCode,
-      language: "html",
-      title: "embed.html",
-    }
-
     const themes = [
         { value: "neon", title: "Neon", color: "#a855f7" },
         { value: "minimal", title: "Minimal", color: "#718096" },
@@ -163,7 +156,7 @@ export default function SettingsBar({
         { value: "#06b6d4", name: "Cyan" },
         { value: "#8b5cf6", name: "Violet" },
         { value: "#000000", name: "Black" },
-        { value: "#ffffff", name: "fg" },
+        { value: "#ffffff", name: "White" },
     ]
 
     const sections = [
@@ -171,17 +164,6 @@ export default function SettingsBar({
         { id: "appearance", label: "Style", icon: RiLayoutMasonryLine },
         { id: "content", label: "Content", icon: RiCheckboxMultipleLine },
     ]
-
-    // Custom slider styles
-    const sliderStyles = {
-        width: "100%",
-        height: "6px",
-        background: "rgba(255,255,255,0.2)",
-        borderRadius: "9999px",
-        appearance: "none" as const,
-        cursor: "pointer",
-        outline: "none",
-    }
 
     return (
         <Box 
@@ -204,32 +186,12 @@ export default function SettingsBar({
                 pointerEvents: "none",
             }}
         >
-            {/* Header */}
-            <Box 
-                p={5} 
-                borderBottom="1px solid" 
-                borderColor="border"
-                position="relative"
-            >
-                <Text 
-                    fontSize="lg" 
-                    fontWeight="semibold" 
-                    color="fg"
-                    letterSpacing="wide"
-                >
-                    Settings
-                </Text>
+            <Box p={5} borderBottom="1px solid" borderColor="border" position="relative">
+                <Text fontSize="lg" fontWeight="semibold" color="fg" letterSpacing="wide">Settings</Text>
             </Box>
 
-            {/* Section Tabs - Modern pill style */}
             <Box px={4} pt={4} position="relative">
-                <Grid 
-                    templateColumns="repeat(3, 1fr)" 
-                    gap={1} 
-                    bg="gray.subtle" 
-                    p={1} 
-                    borderRadius="md"
-                >
+                <Grid templateColumns="repeat(3, 1fr)" gap={1} bg="gray.subtle" p={1} borderRadius="md">
                     {sections.map((section) => {
                         const Icon = section.icon
                         const isActive = activeSection === section.id
@@ -240,10 +202,7 @@ export default function SettingsBar({
                                 variant="ghost"
                                 bg={isActive ? "gray.muted" : "transparent"}
                                 color={isActive ? "fg" : "fg/70"}
-                                _hover={{ 
-                                    bg: isActive ? "gray.muted" : "gray.muted",
-                                    color: "fg"
-                                }}
+                                _hover={{ bg: isActive ? "gray.muted" : "gray.muted", color: "fg" }}
                                 onClick={() => setActiveSection(section.id as typeof activeSection)}
                                 borderRadius="md"
                                 transition="all 0.2s"
@@ -256,110 +215,24 @@ export default function SettingsBar({
                 </Grid>
             </Box>
 
-            {/* Content */}
-            <Box 
-                p={4} 
-                overflowY="auto" 
-                maxH="calc(100vh - 280px)"
-                position="relative"
-            >
-                {/* THEME SECTION */}
+            <Box p={4} overflowY="auto" maxH="calc(100vh - 280px)" position="relative">
                 {activeSection === "theme" && (
                 <ScrollArea.Root height="20.5rem" variant={"always"} size={"xs"}>
-                <ScrollArea.Viewport
-                    css={{
-                    "--scroll-shadow-size": "4rem",
-                    maskImage: "linear-gradient(#000, #000)",
-                    "&[data-overflow-y]": {
-                        maskImage:
-                        "linear-gradient(#000,#000,transparent 0,#000 var(--scroll-shadow-size),#000 calc(100% - var(--scroll-shadow-size)),transparent)",
-                        "&[data-at-top]": {
-                        maskImage:
-                            "linear-gradient(180deg,#000 calc(100% - var(--scroll-shadow-size)),transparent)",
-                        },
-                        "&[data-at-bottom]": {
-                        maskImage:
-                            "linear-gradient(0deg,#000 calc(100% - var(--scroll-shadow-size)),transparent)",
-                        },
-                    },
-                    }}
-                >
+                <ScrollArea.Viewport css={{"--scroll-shadow-size": "4rem", maskImage: "linear-gradient(#000, #000)", "&[data-overflow-y]": { maskImage: "linear-gradient(#000,#000,transparent 0,#000 var(--scroll-shadow-size),#000 calc(100% - var(--scroll-shadow-size)),transparent)" }}}>
                 <ScrollArea.Content paddingEnd="3" textStyle="sm">
                 <VStack gap={5} align="stretch">
-                        {/* Theme Mode */}
                         <Box>
-                            <Text 
-                                fontWeight="medium" 
-                                fontSize="xs" 
-                                mb={3} 
-                                color="fg/60"
-                                textTransform="uppercase"
-                                letterSpacing="wider"
-                            >
-                                Mode
-                            </Text>
+                            <Text fontWeight="medium" fontSize="xs" mb={3} color="fg/60" textTransform="uppercase" letterSpacing="wider">Mode</Text>
                             <Grid templateColumns="repeat(2, 1fr)" gap={2}>
-                                <Button
-                                    size="sm"
-                                    bg={themeMode === "dark" ? "blue.subtle" : "gray.subtle"}
-                                    color="fg"
-                                    border="1px solid"
-                                    borderColor={themeMode === "dark" ? "blue.border" : "gray.muted"}
-                                    _hover={{ 
-                                        bg: themeMode === "dark" ? "blue.subtle" : "gray.subtle",
-                                        borderColor: themeMode === "dark" ? "blue.border" : "gray.emphasized"
-                                    }}
-                                    onClick={() => setThemeMode("dark")}
-                                >
-                                    🌙 Dark
-                                </Button>
-                                <Button
-                                    size="sm"
-                                    bg={themeMode === "light" ? "blue.subtle" : "gray.subtle"}
-                                    color="fg"
-                                    border="1px solid"
-                                    borderColor={themeMode === "light" ? "blue.border" : "gray.muted"}
-                                    _hover={{ 
-                                        bg: themeMode === "light" ? "blue.subtle" : "gray.subtle",
-                                        borderColor: themeMode === "light" ? "blue.border" : "gray.emphasized"
-                                    }}
-                                    onClick={() => setThemeMode("light")}
-                                >
-                                    ☀️ Light
-                                </Button>
+                                <Button size="sm" bg={themeMode === "dark" ? "blue.subtle" : "gray.subtle"} color="fg" border="1px solid" borderColor={themeMode === "dark" ? "blue.border" : "gray.muted"} _hover={{ bg: themeMode === "dark" ? "blue.subtle" : "gray.subtle", borderColor: themeMode === "dark" ? "blue.border" : "gray.emphasized" }} onClick={() => setThemeMode("dark")}>🌙 Dark</Button>
+                                <Button size="sm" bg={themeMode === "light" ? "blue.subtle" : "gray.subtle"} color="fg" border="1px solid" borderColor={themeMode === "light" ? "blue.border" : "gray.muted"} _hover={{ bg: themeMode === "light" ? "blue.subtle" : "gray.subtle", borderColor: themeMode === "light" ? "blue.border" : "gray.emphasized" }} onClick={() => setThemeMode("light")}>☀️ Light</Button>
                             </Grid>
                         </Box>
-                        
-                        {/* Theme Selection */}
                         <Box>
-                            <Text 
-                                fontWeight="medium" 
-                                fontSize="xs" 
-                                mb={3} 
-                                color="fg/60"
-                                textTransform="uppercase"
-                                letterSpacing="wider"
-                            >
-                                Theme
-                            </Text>
+                            <Text fontWeight="medium" fontSize="xs" mb={3} color="fg/60" textTransform="uppercase" letterSpacing="wider">Theme</Text>
                             <Grid templateColumns="repeat(3, 1fr)" gap={2}>
                                 {themes.map((item) => (
-                                    <Button
-                                        key={item.value}
-                                        size="sm"
-                                        bg={theme === item.value ? "gray.muted" : "gray.subtle"}
-                                        color="fg"
-                                        border="1px solid"
-                                        borderColor={theme === item.value ? item.color : "transparent"}
-                                        _hover={{ 
-                                            bg: theme === item.value ? "gray.muted" : "gray.subtle",
-                                        }}
-                                        onClick={() => setTheme(item.value as ThemeName)}
-                                        position="relative"
-                                        overflow="hidden"
-                                    >
-                                        {item.title}
-                                    </Button>
+                                    <Button key={item.value} size="sm" bg={theme === item.value ? "gray.muted" : "gray.subtle"} color="fg" border="1px solid" borderColor={theme === item.value ? item.color : "transparent"} _hover={{ bg: theme === item.value ? "gray.muted" : "gray.subtle" }} onClick={() => setTheme(item.value as ThemeName)}>{item.title}</Button>
                                 ))}
                             </Grid>
                         </Box>
@@ -369,110 +242,28 @@ export default function SettingsBar({
                 </ScrollArea.Root>
                 )}
 
-                {/* APPEARANCE SECTION */}
                 {activeSection === "appearance" && (
                 <ScrollArea.Root height="20.5rem" variant={"hover"} size={"xs"}>
-                <ScrollArea.Viewport
-                    css={{
-                    "--scroll-shadow-size": "4rem",
-                    maskImage: "linear-gradient(#000, #000)",
-                    "&[data-overflow-y]": {
-                        maskImage:
-                        "linear-gradient(#000,#000,transparent 0,#000 var(--scroll-shadow-size),#000 calc(100% - var(--scroll-shadow-size)),transparent)",
-                        "&[data-at-top]": {
-                        maskImage:
-                            "linear-gradient(180deg,#000 calc(100% - var(--scroll-shadow-size)),transparent)",
-                        },
-                        "&[data-at-bottom]": {
-                        maskImage:
-                            "linear-gradient(0deg,#000 calc(100% - var(--scroll-shadow-size)),transparent)",
-                        },
-                    },
-                    }}
-                >
+                <ScrollArea.Viewport css={{"--scroll-shadow-size": "4rem", maskImage: "linear-gradient(#000, #000)", "&[data-overflow-y]": { maskImage: "linear-gradient(#000,#000,transparent 0,#000 var(--scroll-shadow-size),#000 calc(100% - var(--scroll-shadow-size)),transparent)" }}}>
                 <ScrollArea.Content paddingEnd="3" textStyle="sm">
                     <VStack gap={5} align="stretch">
-                        {/* Border Radius Settings */}
                         <Box>
-                            <Text 
-                                fontWeight="medium" 
-                                fontSize="xs" 
-                                mb={3} 
-                                color="fg/60"
-                                textTransform="uppercase"
-                                letterSpacing="wider"
-                            >
-                                Border Radius
-                            </Text>
+                            <Text fontWeight="medium" fontSize="xs" mb={3} color="fg/60" textTransform="uppercase" letterSpacing="wider">Border Radius</Text>
                             <VStack gap={4} align="stretch">
-                                <Box>
-                                    <Slider defaultValue={[logoRadius]} label={"Logo"} showValue={true} min={0} max={24}
-                                    onChange={(e) => setLogoRadius(Number(e.target.value))} />
-                                </Box>
-                                <Box>
-                                    <Slider defaultValue={[buttonRadius]} label={"Button"} showValue={true} min={0} max={24}
-                                    onChange={(e) => setButtonRadius(Number(e.target.value))} />
-                                </Box>
-                                <Box>
-                                    <Slider defaultValue={[cardRadius]} label={"Card"} showValue={true} min={0} max={24}
-                                    onChange={(e) => setCardRadius(Number(e.target.value))} />
-                                </Box>
+                                <Slider defaultValue={[logoRadius]} label={"Logo"} showValue={true} min={0} max={24} onValueChange={(details) => setLogoRadius(details.value[0])} />
+                                <Slider defaultValue={[buttonRadius]} label={"Button"} showValue={true} min={0} max={24} onValueChange={(details) => setButtonRadius(details.value[0])} />
+                                <Slider defaultValue={[cardRadius]} label={"Card"} showValue={true} min={0} max={24} onValueChange={(details) => setCardRadius(details.value[0])} />
                             </VStack>
                         </Box>
-
-                        {/* Button Color */}
                         <Box>
-                            <Text 
-                                fontWeight="medium" 
-                                fontSize="xs" 
-                                my={3} 
-                                color="fg/60"
-                                textTransform="uppercase"
-                                letterSpacing="wider"
-                            >
-                                Button Color
-                            </Text>
+                            <Text fontWeight="medium" fontSize="xs" my={3} color="fg/60" textTransform="uppercase" letterSpacing="wider">Button Color</Text>
                             <Grid templateColumns="repeat(5, 1fr)" gap={2} mb={3}>
                                 {buttonColors.map((color) => (
-                                    <Box
-                                        key={color.value}
-                                        as="button"
-                                        onClick={() => setButtonColor(color.value)}
-                                        h="10"
-                                        borderRadius="md"
-                                        bg={color.value}
-                                        borderWidth="2px"
-                                        borderColor={buttonColor === color.value ? "gray.fg" : "gray.emphasized"}
-                                        transition="all 0.2s"
-                                        _hover={{ 
-                                            transform: "scale(1.1)",
-                                            boxShadow: `0 0 12px ${color.value}50`
-                                        }}
-                                        title={color.name}
-                                    />
+                                    <Box key={color.value} as="button" onClick={() => setButtonColor(color.value)} h="10" borderRadius="md" bg={color.value} borderWidth="2px" borderColor={buttonColor === color.value ? "gray.fg" : "gray.emphasized"} transition="all 0.2s" _hover={{ transform: "scale(1.1)", boxShadow: `0 0 12px ${color.value}50` }} title={color.name} />
                                 ))}
                             </Grid>
-                            <Box position="relative">
-                                <ColorPicker.Root defaultValue={parseColor(buttonColor)} variant={"outline"} onChange={(e) => setButtonColor(e.target.value)}>
-                                <ColorPicker.HiddenInput />
-                                <ColorPicker.Label />
-                                <ColorPicker.Control>
-                                    <ColorPicker.Trigger w={"full"} data-fit-content/>
-                                </ColorPicker.Control>
-                                <ColorPicker.Positioner>
-                                    <ColorPicker.Content p={3}>
-                                        <ColorPicker.Area />
-                                        <ColorPickerChannelSlider channel="hue" />
-                                    </ColorPicker.Content>
-                                </ColorPicker.Positioner>
-                                </ColorPicker.Root>
-                                <style>{`
-                                    .colorPicker__swatch.css-lkq982 {
-                                        width: 100%;
-                                        height: 35px;
-                                        border-radius: 6px;
-                                    }
-                                `}</style>
+                            <Box>
+                                <input type="color" value={buttonColor} onChange={(e) => setButtonColor(e.target.value)} style={{ width: "100%", height: "40px", borderRadius: "6px", cursor: "pointer", border: "1px solid var(--chakra-colors-border)" }} />
                             </Box>
                         </Box>
                     </VStack>
@@ -482,153 +273,44 @@ export default function SettingsBar({
                 </ScrollArea.Root>
                 )}
 
-                {/* CONTENT SECTION */}
                 {activeSection === "content" && (
                 <ScrollArea.Root height="20.5rem" variant={"always"} size={"xs"}>
-                <ScrollArea.Viewport
-                    css={{
-                    "--scroll-shadow-size": "4rem",
-                    maskImage: "linear-gradient(#000, #000)",
-                    "&[data-overflow-y]": {
-                        maskImage:
-                        "linear-gradient(#000,#000,transparent 0,#000 var(--scroll-shadow-size),#000 calc(100% - var(--scroll-shadow-size)),transparent)",
-                        "&[data-at-top]": {
-                        maskImage:
-                            "linear-gradient(180deg,#000 calc(100% - var(--scroll-shadow-size)),transparent)",
-                        },
-                        "&[data-at-bottom]": {
-                        maskImage:
-                            "linear-gradient(0deg,#000 calc(100% - var(--scroll-shadow-size)),transparent)",
-                        },
-                    },
-                    }}
-                >
+                <ScrollArea.Viewport css={{"--scroll-shadow-size": "4rem", maskImage: "linear-gradient(#000, #000)", "&[data-overflow-y]": { maskImage: "linear-gradient(#000,#000,transparent 0,#000 var(--scroll-shadow-size),#000 calc(100% - var(--scroll-shadow-size)),transparent)" }}}>
                 <ScrollArea.Content paddingEnd="3" textStyle="sm">
                 <VStack gap={5} align="stretch">
                     <Box>
-                        <Text 
-                            fontWeight="medium" 
-                            fontSize="xs" 
-                            mb={3} 
-                            color="fg/60"
-                            textTransform="uppercase"
-                            letterSpacing="wider"
-                        >
-                            Widget Content
-                        </Text>
+                        <Text fontWeight="medium" fontSize="xs" mb={3} color="fg/60" textTransform="uppercase" letterSpacing="wider">Widget Content</Text>
                         <Grid gap={2} templateColumns="repeat(2, 1fr)">
-                            <GridItem>
-                                <CheckboxCard
-                                    checked={showIcon}
-                                    onCheckedChange={(checked) => canShowIcon && setShowIcon(checked)}
-                                    label="Icon"
-                                    icon={IoLogoTableau}
-                                    description="Displays the server's avatar or icon in the widget."
-                                    disabled={!canShowIcon}
-                                />
-                            </GridItem>
-                            <GridItem>
-                                <CheckboxCard
-                                    checked={showMembers}
-                                    onCheckedChange={(checked) => canShowMembers && setShowMembers(checked)}
-                                    label="Members"
-                                    icon={BsFillPeopleFill}
-                                    description="Shows the total number of members in the server."
-                                    disabled={!canShowMembers}
-                                />
-                            </GridItem>
-                            <GridItem>
-                                <CheckboxCard
-                                    checked={showOnline}
-                                    onCheckedChange={(checked) => canShowOnline && setShowOnline(checked)}
-                                    label="Online"
-                                    icon={HiStatusOnline}
-                                    description="Displays how many members are currently online."
-                                    disabled={!canShowOnline}
-                                />
-                            </GridItem>
-                            <GridItem>
-                                <CheckboxCard
-                                    checked={showGuildName}
-                                    onCheckedChange={(checked) => canShowGuildName && setShowGuildName(checked)}
-                                    label="Name"
-                                    icon={CgNametag}
-                                    description="Shows the server name at the top of the widget."
-                                    disabled={!canShowGuildName}
-                                />
-                            </GridItem>
-                            <GridItem>
-                                <CheckboxCard
-                                    checked={showDescription}
-                                    onCheckedChange={(checked) => canShowDescription && setShowDescription(checked)}
-                                    label="Description"
-                                    icon={LuScrollText}
-                                    description="Displays the server description or tagline."
-                                    disabled={!canShowDescription}
-                                />
-                            </GridItem>
-                            <GridItem>
-                                <CheckboxCard
-                                    checked={showBanner}
-                                    onCheckedChange={(checked) => canShowBanner && setShowBanner(checked)}
-                                    label="Banner"
-                                    icon={PiFlagBannerFoldFill}
-                                    description="Shows the server banner or cover image in the widget."
-                                    disabled={!canShowBanner}
-                                />
-                            </GridItem>
-                            <GridItem colSpan={2}>
-                                <CheckboxCard
-                                    checked={showBadge}
-                                    onCheckedChange={(checked) => canShowBadge && setShowBadge(checked)}
-                                    label="Badge"
-                                    icon={RiPoliceBadgeFill}
-                                    description="Displays a small badge or tag (e.g. NEW, OPEN, VERIFIED)."
-                                    disabled={!canShowBadge}
-                                />
-                            </GridItem>
+                            <GridItem><CheckboxCard checked={showIcon} onCheckedChange={(checked) => canShowIcon && setShowIcon(checked)} label="Icon" icon={IoLogoTableau} description="Displays the server's avatar or icon in the widget." disabled={!canShowIcon} /></GridItem>
+                            <GridItem><CheckboxCard checked={showMembers} onCheckedChange={(checked) => canShowMembers && setShowMembers(checked)} label="Members" icon={BsFillPeopleFill} description="Shows the total number of members in the server." disabled={!canShowMembers} /></GridItem>
+                            <GridItem><CheckboxCard checked={showOnline} onCheckedChange={(checked) => canShowOnline && setShowOnline(checked)} label="Online" icon={HiStatusOnline} description="Displays how many members are currently online." disabled={!canShowOnline} /></GridItem>
+                            <GridItem><CheckboxCard checked={showGuildName} onCheckedChange={(checked) => canShowGuildName && setShowGuildName(checked)} label="Name" icon={CgNametag} description="Shows the server name at the top of the widget." disabled={!canShowGuildName} /></GridItem>
+                            <GridItem><CheckboxCard checked={showDescription} onCheckedChange={(checked) => canShowDescription && setShowDescription(checked)} label="Description" icon={LuScrollText} description="Displays the server description or tagline." disabled={!canShowDescription} /></GridItem>
+                            <GridItem><CheckboxCard checked={showBanner} onCheckedChange={(checked) => canShowBanner && setShowBanner(checked)} label="Banner" icon={PiFlagBannerFoldFill} description="Shows the server banner or cover image in the widget." disabled={!canShowBanner} /></GridItem>
+                            <GridItem colSpan={2}><CheckboxCard checked={showBadge} onCheckedChange={(checked) => canShowBadge && setShowBadge(checked)} label="Badge" icon={RiPoliceBadgeFill} description="Displays a small badge or tag (e.g. NEW, OPEN, VERIFIED)." disabled={!canShowBadge} /></GridItem>
                         </Grid>
                     </Box>
-                    </VStack>
+                </VStack>
                 </ScrollArea.Content>
                 </ScrollArea.Viewport>
                 </ScrollArea.Root>
                 )}
             </Box>
 
-            {/* Embed Code Section */}
             <Accordion.Root collapsible p={4}>
             <Accordion.Item value="embed-code" disabled={!shareCode} style={{borderBottomWidth: 0}}>
                 <Accordion.ItemTrigger>
                     <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"} flex="1">
-                    <Text fontWeight="medium" fontSize="xs" color="whiteAlpha.600" textTransform="uppercase" letterSpacing="wider">
-                        Embed Code
-                    </Text>
+                    <Text fontWeight="medium" fontSize="xs" color="whiteAlpha.600" textTransform="uppercase" letterSpacing="wider">Embed Code</Text>
                     <Accordion.ItemIndicator />
                     </Box>
                 </Accordion.ItemTrigger>
                 <Accordion.ItemContent mt={3}>
                 <Accordion.ItemBody>
                     {shareCode && (
-                        <Box 
-                            bg="bg.subtle" 
-                            p={3} 
-                            borderRadius="md"
-                            border="1px solid"
-                            borderColor="bg.muted"
-                        >
-                            <Text 
-                                fontSize="xs" 
-                                fontFamily="mono" 
-                                color="fg/70"
-                                whiteSpace="pre-wrap"
-                                wordBreak="break-all"
-                            >
-                                {iframeCode}
-                            </Text>
-                            <Text fontSize="xs" color="fg/30" mt={2}>
-                                URL: {widgetPath}
-                            </Text>
+                        <Box bg="bg.subtle" p={3} borderRadius="md" border="1px solid" borderColor="bg.muted">
+                            <Text fontSize="xs" fontFamily="mono" color="fg/70" whiteSpace="pre-wrap" wordBreak="break-all">{iframeCode}</Text>
+                            <Text fontSize="xs" color="fg/30" mt={2}>URL: {widgetPath}</Text>
                         </Box>
                     )}
                 </Accordion.ItemBody>
