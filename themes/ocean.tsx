@@ -190,7 +190,7 @@ export default function OceanTheme({
       </HStack>
 
       {inviteUrl ? (
-        <Box as="a" href={inviteUrl} target="_blank" rel="noopener noreferrer" display="block" mt={4} _hover={{ textDecoration: "none" }}>
+        <a href={inviteUrl} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginTop: "1rem", textDecoration: "none" }}>
           <Button
             w="full"
             size="md"
@@ -204,7 +204,7 @@ export default function OceanTheme({
           >
             Join Server
           </Button>
-        </Box>
+        </a>
       ) : (
         <Button
           mt={4}

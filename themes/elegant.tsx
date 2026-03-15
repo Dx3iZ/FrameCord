@@ -140,9 +140,9 @@ export default function ElegantTheme({
       </HStack>
 
       {inviteUrl ? (
-        <Box as="a" href={inviteUrl} target="_blank" rel="noopener noreferrer" display="block" mt={4} _hover={{ textDecoration: "none" }}>
+        <a href={inviteUrl} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginTop: "1rem", textDecoration: "none" }}>
           <Button w="full" size="sm" bg="transparent" color={textColor} borderWidth="1px" borderColor={borderCol} rounded={buttonRadiusPx} _hover={{ bg: textColor, color: bgColor, borderColor: textColor }} transition="all 0.3s ease" fontWeight="300" letterSpacing="0.15em" textTransform="uppercase" h="36px">Join Server</Button>
-        </Box>
+        </a>
       ) : (
         <Button mt={4} w="full" size="sm" bg="transparent" color={textColor} borderWidth="1px" borderColor={borderCol} rounded={buttonRadiusPx} _hover={{ bg: textColor, color: bgColor, borderColor: textColor }} transition="all 0.3s ease" fontWeight="300" letterSpacing="0.15em" textTransform="uppercase" h="36px">Join Server</Button>
       )}

@@ -167,9 +167,9 @@ export default function CandyTheme({
       </HStack>
 
       {inviteUrl ? (
-        <Box as="a" href={inviteUrl} target="_blank" rel="noopener noreferrer" display="block" mt={4} _hover={{ textDecoration: "none" }}>
+        <a href={inviteUrl} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginTop: "1rem", textDecoration: "none" }}>
           <Button w="full" size="md" bg="white" color={accentColor} rounded={buttonRadiusPx} _hover={{ bg: "white", transform: "scale(1.02)", boxShadow: "0 8px 25px rgba(236, 72, 153, 0.4)" }} transition="all 0.2s ease" fontWeight="700" letterSpacing="0.05em" h="42px">✨ Join Server ✨</Button>
-        </Box>
+        </a>
       ) : (
         <Button mt={4} w="full" size="md" bg="white" color={accentColor} rounded={buttonRadiusPx} _hover={{ bg: "white", transform: "scale(1.02)" }} transition="all 0.2s ease" fontWeight="700" letterSpacing="0.05em" h="42px">✨ Join Server ✨</Button>
       )}

@@ -172,9 +172,9 @@ export default function SunsetTheme({
       </HStack>
 
       {inviteUrl ? (
-        <Box as="a" href={inviteUrl} target="_blank" rel="noopener noreferrer" display="block" mt={4} _hover={{ textDecoration: "none" }}>
+        <a href={inviteUrl} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginTop: "1rem", textDecoration: "none" }}>
           <Button w="full" size="md" bg={accentColor} color="white" rounded={buttonRadiusPx} _hover={{ bg: accentColor, transform: "scale(1.02)", boxShadow: `0 4px 20px ${accentColor}60` }} transition="all 0.2s ease" fontWeight="600" h="42px">Join Server</Button>
-        </Box>
+        </a>
       ) : (
         <Button mt={4} w="full" size="md" bg={accentColor} color="white" rounded={buttonRadiusPx} _hover={{ bg: accentColor, transform: "scale(1.02)" }} transition="all 0.2s ease" fontWeight="600" h="42px">Join Server</Button>
       )}

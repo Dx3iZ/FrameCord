@@ -142,9 +142,9 @@ export default function RetroTheme({
       </HStack>
 
       {inviteUrl ? (
-        <Box as="a" href={inviteUrl} target="_blank" rel="noopener noreferrer" display="block" mt={4} _hover={{ textDecoration: "none" }}>
+        <a href={inviteUrl} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginTop: "1rem", textDecoration: "none" }}>
           <Button w="full" size="md" bg={accentColor} color={themeMode === "light" ? "white" : "black"} rounded={buttonRadiusPx} fontFamily="mono" fontWeight="bold" fontSize="sm" borderWidth="2px" borderColor={borderCol} _hover={{ bg: accentColor, transform: "translate(-2px, -2px)", boxShadow: borderCol }} transition="all 0.1s" h="40px">★ JOIN SERVER ★</Button>
-        </Box>
+        </a>
       ) : (
         <Button mt={4} w="full" size="md" bg={accentColor} color={themeMode === "light" ? "white" : "black"} rounded={buttonRadiusPx} fontFamily="mono" fontWeight="bold" fontSize="sm" borderWidth="2px" borderColor={borderCol} _hover={{ bg: accentColor, transform: "translate(-2px, -2px)", boxShadow: borderCol }} transition="all 0.1s" h="40px">★ JOIN SERVER ★</Button>
       )}

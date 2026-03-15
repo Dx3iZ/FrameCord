@@ -145,14 +145,11 @@ export default function NeonTheme({
       </Card.Body>
       <Card.Footer zIndex={3} p={4}>
       {inviteUrl ? (
-        <Box
-          as="a"
+        <a
           href={inviteUrl}
           target="_blank"
           rel="noopener noreferrer"
-          display="block"
-          w={"full"}
-          _hover={{ textDecoration: "none" }}
+          style={{ display: "block", width: "100%", textDecoration: "none" }}
         >
           <Button
             w="full"
@@ -172,7 +169,7 @@ export default function NeonTheme({
           >
             Join Server
           </Button>
-        </Box>
+        </a>
       ) : (
         <Button
           w="full"

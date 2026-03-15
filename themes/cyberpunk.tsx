@@ -140,9 +140,9 @@ export default function CyberpunkTheme({
       </Card.Body>
       <Card.Footer zIndex={3} p={4}>
         {inviteUrl ? (
-          <Box w={"full"} as="a" href={inviteUrl} target="_blank" rel="noopener noreferrer" display="block" _hover={{ textDecoration: "none" }}>
+          <a href={inviteUrl} target="_blank" rel="noopener noreferrer" style={{ display: "block", width: "100%", textDecoration: "none" }}>
             <Button w="full" size="sm" bg={buttonColor} color={themeMode === "light" ? "white" : "black"} rounded={buttonRadiusPx} _hover={{ opacity: 0.8, boxShadow: `0 0 25px ${buttonColor}`, transform: "scale(1.02)" }} transition="all 0.2s" fontFamily="mono" textTransform="uppercase" letterSpacing="wider" fontWeight="bold">Join Server</Button>
-          </Box>
+          </a>
         ) : (
           <Button w="full" size="sm" bg={buttonColor} color={themeMode === "light" ? "white" : "black"} rounded={buttonRadiusPx} _hover={{ opacity: 0.8, transform: "scale(1.02)" }} transition="all 0.2s" fontFamily="mono" textTransform="uppercase" letterSpacing="wider" fontWeight="bold">Join Server</Button>
         )}

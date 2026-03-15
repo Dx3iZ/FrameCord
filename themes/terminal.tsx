@@ -97,17 +97,14 @@ export default function TerminalTheme({
       {inviteUrl ? (
         <Text mt={3} fontSize="xs">
           {" > "}{" "}
-          <Text
-            as="a"
+          <a
             href={inviteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            color={buttonColor}
-            textDecoration="underline"
-            _hover={{ opacity: 0.9 }}
+            style={{ color: buttonColor, textDecoration: "underline" }}
           >
             press ENTER to join
-          </Text>
+          </a>
         </Text>
       ) : (
         <Text mt={3} fontSize="xs">

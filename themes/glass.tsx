@@ -221,14 +221,11 @@ export default function GlassTheme({
       </HStack>
 
       {inviteUrl ? (
-        <Box
-          as="a"
+        <a
           href={inviteUrl}
           target="_blank"
           rel="noopener noreferrer"
-          display="block"
-          mt={4}
-          _hover={{ textDecoration: "none" }}
+          style={{ display: "block", marginTop: "1rem", textDecoration: "none" }}
         >
           <Button
             w="full"
@@ -259,7 +256,7 @@ export default function GlassTheme({
             />
             <Text position="relative" zIndex={1}>Join Server</Text>
           </Button>
-        </Box>
+        </a>
       ) : (
         <Button
           mt={4}

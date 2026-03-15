@@ -277,14 +277,11 @@ export default function AnimatedTheme({
         transition={{ duration: 0.4, delay: 0.5 }}
       >
         {inviteUrl ? (
-          <Box
-            as="a"
+          <a
             href={inviteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            display="block"
-            mt={4}
-            _hover={{ textDecoration: "none" }}
+            style={{ display: "block", marginTop: "1rem", textDecoration: "none" }}
           >
             <Button
               w="full"
@@ -318,7 +315,7 @@ export default function AnimatedTheme({
             >
               Join Server
             </Button>
-          </Box>
+          </a>
         ) : (
           <Button
             mt={4}

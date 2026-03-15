@@ -177,9 +177,9 @@ export default function GradientTheme({
       </HStack>
 
       {inviteUrl ? (
-        <Box as="a" href={inviteUrl} target="_blank" rel="noopener noreferrer" display="block" mt={4} _hover={{ textDecoration: "none" }}>
+        <a href={inviteUrl} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginTop: "1rem", textDecoration: "none" }}>
           <Button mt={0} w="full" size="md" bg="white" color="#4c1d95" rounded={buttonRadiusPx} _hover={{ bg: "white", transform: "scale(1.02)", boxShadow: "0 8px 25px rgba(0,0,0,0.3)" }} transition="all 0.2s ease" fontWeight="700" letterSpacing="0.05em" textTransform="uppercase" h="44px" boxShadow="0 4px 15px rgba(0,0,0,0.15)">Join Server</Button>
-        </Box>
+        </a>
       ) : (
         <Button mt={4} w="full" size="md" bg="white" color={themeMode === "light" ? "#4c1d95" : "#4c1d95"} rounded={buttonRadiusPx} _hover={{ bg: "white", transform: "scale(1.02)", boxShadow: "0 8px 25px rgba(0,0,0,0.3)" }} transition="all 0.2s ease" fontWeight="700" letterSpacing="0.05em" textTransform="uppercase" h="44px" boxShadow="0 4px 15px rgba(0,0,0,0.15)">Join Server</Button>
       )}

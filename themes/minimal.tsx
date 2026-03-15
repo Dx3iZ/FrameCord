@@ -187,15 +187,11 @@ export default function MinimalTheme({
       </HStack>
 
       {inviteUrl ? (
-        <Box
-          as="a"
+        <a
           href={inviteUrl}
           target="_blank"
           rel="noopener noreferrer"
-          display="block"
-          mt={4}
-          w={"full"}
-          _hover={{ textDecoration: "none" }}
+          style={{ display: "block", marginTop: "1rem", width: "100%", textDecoration: "none" }}
         >
           <Button
             w="full"
@@ -215,7 +211,7 @@ export default function MinimalTheme({
           >
             Join Server
           </Button>
-        </Box>
+        </a>
       ) : (
         <Button
           mt={4}
