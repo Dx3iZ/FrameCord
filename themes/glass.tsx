@@ -14,6 +14,7 @@ interface ThemeProps {
   cardRadius?: number
   buttonColor?: string
   themeMode?: "dark" | "light"
+  inviteUrl?: string
 }
 
 export default function GlassTheme({
@@ -30,7 +31,15 @@ export default function GlassTheme({
   cardRadius = 16,
   buttonColor = "#06b6d4",
   themeMode = "dark",
+  inviteUrl,
 }: ThemeProps) {
+  
+  const handleJoinClick = () => {
+    if (inviteUrl) {
+      window.open(inviteUrl, "_blank", "noopener,noreferrer")
+    }
+  }
+  
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -236,6 +245,8 @@ export default function GlassTheme({
         h="42px"
         position="relative"
         overflow="hidden"
+        onClick={handleJoinClick}
+        disabled={!inviteUrl}
       >
         <Box
           position="absolute"

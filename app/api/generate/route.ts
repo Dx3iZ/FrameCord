@@ -54,10 +54,19 @@ export async function GET(request: NextRequest) {
       );
     }
     
-    // Validate invite format
-    if (!/^[a-zA-Z0-9_-]+$/.test(invite)) {
+    // Extract invite code from various formats (URLs, with/without protocol)
+    const inviteCode = invite.trim()
+      .replace(/^https?:\/\//, "") // Remove protocol
+      .replace(/^www\./, "") // Remove www
+      .replace(/^discord\.gg\//, "") // Remove discord.gg/ prefix
+      .replace(/^discord\.com\/invite\//, "") // Remove discord.com/invite/ prefix
+      .split(/[?#]/)[0] // Remove query params and hash
+      .trim();
+    
+    // Validate extracted invite code format
+    if (!inviteCode || !/^[a-zA-Z0-9_-]+$/.test(inviteCode)) {
       return NextResponse.json(
-        { error: true, message: "Invalid invite code format. Use only letters, numbers, underscores and hyphens.", code: "INVALID_INVITE_FORMAT" },
+        { error: true, message: "Invalid invite code format. Use a valid Discord invite code (e.g., abc123 or discord.gg/abc123)", code: "INVALID_INVITE_FORMAT" },
         { status: 400 }
       );
     }
@@ -131,8 +140,8 @@ export async function GET(request: NextRequest) {
     // Encode config to base64
     const encodedConfig = encodeConfig(config);
     
-    // Use invite code or placeholder
-    const serverId = invite || "{inviteCode}";
+    // Use extracted invite code
+    const serverId = inviteCode;
     const widgetPath = `/w/${serverId}?c=${encodeURIComponent(encodedConfig)}`;
 
     // Build full URL (use request URL for host)

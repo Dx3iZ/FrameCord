@@ -14,6 +14,7 @@ interface ThemeProps {
   cardRadius?: number
   buttonColor?: string
   themeMode?: "dark" | "light"
+  inviteUrl?: string
 }
 
 export default function CyberpunkTheme({
@@ -30,7 +31,15 @@ export default function CyberpunkTheme({
   cardRadius = 12,
   buttonColor = "#00f0ff",
   themeMode = "dark",
+  inviteUrl,
 }: ThemeProps) {
+  
+  const handleJoinClick = () => {
+    if (inviteUrl) {
+      window.open(inviteUrl, "_blank", "noopener,noreferrer")
+    }
+  }
+  
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -153,6 +162,8 @@ export default function CyberpunkTheme({
           textTransform="uppercase"
           letterSpacing="wider"
           fontWeight="bold"
+          onClick={handleJoinClick}
+          disabled={!inviteUrl}
         >
           Join Server
         </Button>

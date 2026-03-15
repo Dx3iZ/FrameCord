@@ -34,6 +34,7 @@ type DiscordWidgetData = {
   approximate_member_count?: number
   approximate_presence_count?: number
   invites?: Record<string, unknown>
+  instant_invite?: string | null
   profile?: {
     badge_hash?: string | null
     tag?: string | null
@@ -56,6 +57,7 @@ type WidgetPreviewProps = {
   cardRadius?: number
   buttonColor?: string
   themeMode?: "dark" | "light"
+  inviteUrl?: string
 }
 
 const themeMap: Record<string, React.ComponentType<any>> = {
@@ -96,6 +98,7 @@ export default function WidgetPreview({
   cardRadius = 12,
   buttonColor,
   themeMode = "dark",
+  inviteUrl: inviteUrlProp,
 }: WidgetPreviewProps) {
   if (!data || !data.guild) {
     return (
@@ -120,6 +123,16 @@ export default function WidgetPreview({
   const members = data.approximate_member_count ?? 0
   const online = data.approximate_presence_count ?? 0
   const description = data.guild.description ?? ""
+  
+  // Get the invite URL for the join button - prefer passed prop, then instant_invite, fallback to vanity URL or generated
+  let inviteUrl: string | undefined = inviteUrlProp
+  if (!inviteUrl) {
+    if (data.instant_invite) {
+      inviteUrl = data.instant_invite
+    } else if (data.guild.vanity_url_code) {
+      inviteUrl = `https://discord.gg/${data.guild.vanity_url_code}`
+    }
+  }
 
   const iconUrl = data.guild.icon
     ? `https://cdn.discordapp.com/icons/${guildId}/${data.guild.icon}?size=4096`
@@ -147,6 +160,7 @@ export default function WidgetPreview({
     cardRadius,
     buttonColor,
     themeMode,
+    inviteUrl,
   }
 
   const ThemeComponent = themeMap[theme] || NeonTheme

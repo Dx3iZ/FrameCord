@@ -14,6 +14,7 @@ interface ThemeProps {
   cardRadius?: number
   buttonColor?: string
   themeMode?: "dark" | "light"
+  inviteUrl?: string
 }
 
 export default function RetroTheme({
@@ -30,7 +31,15 @@ export default function RetroTheme({
   cardRadius = 8,
   buttonColor = "#f59e0b",
   themeMode = "dark",
+  inviteUrl,
 }: ThemeProps) {
+  
+  const handleJoinClick = () => {
+    if (inviteUrl) {
+      window.open(inviteUrl, "_blank", "noopener,noreferrer")
+    }
+  }
+  
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -158,6 +167,8 @@ export default function RetroTheme({
         }}
         transition="all 0.1s"
         h="40px"
+        onClick={handleJoinClick}
+        disabled={!inviteUrl}
       >
         ★ JOIN SERVER ★
       </Button>

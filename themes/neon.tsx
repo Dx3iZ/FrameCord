@@ -16,6 +16,7 @@ interface ThemeProps {
   cardRadius?: number
   buttonColor?: string
   themeMode?: "dark" | "light"
+  inviteUrl?: string
 }
 
 export default function NeonTheme({
@@ -32,7 +33,14 @@ export default function NeonTheme({
   cardRadius = 12,
   buttonColor = "#a855f7",
   themeMode = "dark",
+  inviteUrl,
 }: ThemeProps) {
+  
+  const handleJoinClick = () => {
+    if (inviteUrl) {
+      window.open(inviteUrl, "_blank", "noopener,noreferrer")
+    }
+  }
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -157,6 +165,8 @@ export default function NeonTheme({
         fontWeight="semibold"
         textTransform="uppercase"
         letterSpacing="wide"
+        onClick={handleJoinClick}
+        disabled={!inviteUrl}
       >
         Join Server
       </Button>

@@ -14,6 +14,7 @@ interface ThemeProps {
   cardRadius?: number
   buttonColor?: string
   themeMode?: "dark" | "light"
+  inviteUrl?: string
 }
 
 export default function FrostTheme({
@@ -30,7 +31,15 @@ export default function FrostTheme({
   cardRadius = 12,
   buttonColor = "#38bdf8",
   themeMode = "dark",
+  inviteUrl,
 }: ThemeProps) {
+  
+  const handleJoinClick = () => {
+    if (inviteUrl) {
+      window.open(inviteUrl, "_blank", "noopener,noreferrer")
+    }
+  }
+  
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -197,6 +206,8 @@ export default function FrostTheme({
         transition="all 0.2s ease"
         fontWeight="600"
         h="40px"
+        onClick={handleJoinClick}
+        disabled={!inviteUrl}
       >
         ❄️ Join Server
       </Button>

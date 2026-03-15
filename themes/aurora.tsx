@@ -14,6 +14,7 @@ interface ThemeProps {
   cardRadius?: number
   buttonColor?: string
   themeMode?: "dark" | "light"
+  inviteUrl?: string
 }
 
 export default function AuroraTheme({
@@ -30,7 +31,15 @@ export default function AuroraTheme({
   cardRadius = 16,
   buttonColor = "#10b981",
   themeMode = "dark",
+  inviteUrl,
 }: ThemeProps) {
+  
+  const handleJoinClick = () => {
+    if (inviteUrl) {
+      window.open(inviteUrl, "_blank", "noopener,noreferrer")
+    }
+  }
+  
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -191,6 +200,8 @@ export default function AuroraTheme({
         transition="all 0.2s ease"
         fontWeight="600"
         h="42px"
+        onClick={handleJoinClick}
+        disabled={!inviteUrl}
       >
         Join Server
       </Button>

@@ -14,6 +14,7 @@ interface ThemeProps {
   cardRadius?: number
   buttonColor?: string
   themeMode?: "dark" | "light"
+  inviteUrl?: string
 }
 
 export default function CandyTheme({
@@ -30,7 +31,15 @@ export default function CandyTheme({
   cardRadius = 16,
   buttonColor = "#f472b6",
   themeMode = "dark",
+  inviteUrl,
 }: ThemeProps) {
+  
+  const handleJoinClick = () => {
+    if (inviteUrl) {
+      window.open(inviteUrl, "_blank", "noopener,noreferrer")
+    }
+  }
+  
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -180,6 +189,8 @@ export default function CandyTheme({
         fontWeight="700"
         letterSpacing="0.05em"
         h="42px"
+        onClick={handleJoinClick}
+        disabled={!inviteUrl}
       >
         ✨ Join Server ✨
       </Button>

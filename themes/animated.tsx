@@ -17,6 +17,7 @@ interface ThemeProps {
   cardRadius?: number
   buttonColor?: string
   themeMode?: "dark" | "light"
+  inviteUrl?: string
 }
 
 const MotionBox = motion(Box)
@@ -36,7 +37,15 @@ export default function AnimatedTheme({
   cardRadius = 16,
   buttonColor = "#8b5cf6",
   themeMode = "dark",
+  inviteUrl,
 }: ThemeProps) {
+  
+  const handleJoinClick = () => {
+    if (inviteUrl) {
+      window.open(inviteUrl, "_blank", "noopener,noreferrer")
+    }
+  }
+  
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -296,6 +305,8 @@ export default function AnimatedTheme({
           h="44px"
           position="relative"
           overflow="hidden"
+          onClick={handleJoinClick}
+          disabled={!inviteUrl}
           _before={{
             content: '""',
             position: "absolute",

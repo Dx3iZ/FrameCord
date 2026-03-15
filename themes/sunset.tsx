@@ -14,6 +14,7 @@ interface ThemeProps {
   cardRadius?: number
   buttonColor?: string
   themeMode?: "dark" | "light"
+  inviteUrl?: string
 }
 
 export default function SunsetTheme({
@@ -30,7 +31,15 @@ export default function SunsetTheme({
   cardRadius = 16,
   buttonColor = "#ea580c",
   themeMode = "dark",
+  inviteUrl,
 }: ThemeProps) {
+  
+  const handleJoinClick = () => {
+    if (inviteUrl) {
+      window.open(inviteUrl, "_blank", "noopener,noreferrer")
+    }
+  }
+  
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -184,6 +193,8 @@ export default function SunsetTheme({
         transition="all 0.2s ease"
         fontWeight="600"
         h="42px"
+        onClick={handleJoinClick}
+        disabled={!inviteUrl}
       >
         Join Server
       </Button>

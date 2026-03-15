@@ -14,6 +14,7 @@ interface ThemeProps {
   cardRadius?: number
   buttonColor?: string
   themeMode?: "dark" | "light"
+  inviteUrl?: string
 }
 
 export default function GradientTheme({
@@ -30,7 +31,15 @@ export default function GradientTheme({
   cardRadius = 16,
   buttonColor = "#ec4899",
   themeMode = "dark",
+  inviteUrl,
 }: ThemeProps) {
+  
+  const handleJoinClick = () => {
+    if (inviteUrl) {
+      window.open(inviteUrl, "_blank", "noopener,noreferrer")
+    }
+  }
+  
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -192,6 +201,8 @@ export default function GradientTheme({
         textTransform="uppercase"
         h="44px"
         boxShadow="0 4px 15px rgba(0,0,0,0.15)"
+        onClick={handleJoinClick}
+        disabled={!inviteUrl}
       >
         Join Server
       </Button>

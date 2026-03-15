@@ -14,6 +14,7 @@ interface ThemeProps {
   cardRadius?: number
   buttonColor?: string
   themeMode?: "dark" | "light"
+  inviteUrl?: string
 }
 
 export default function TerminalTheme({
@@ -30,7 +31,15 @@ export default function TerminalTheme({
   cardRadius = 12,
   buttonColor = "#22c55e",
   themeMode = "dark",
+  inviteUrl,
 }: ThemeProps) {
+  
+  const handleJoinClick = () => {
+    if (inviteUrl) {
+      window.open(inviteUrl, "_blank", "noopener,noreferrer")
+    }
+  }
+  
   const logoRadiusPx = `${logoRadius}px`
   const cardRadiusPx = `${cardRadius}px`
   
@@ -92,7 +101,13 @@ export default function TerminalTheme({
         </Stack>
       </HStack>
 
-      <Text mt={3} fontSize="xs">
+      <Text 
+        mt={3} 
+        fontSize="xs" 
+        cursor={inviteUrl ? "pointer" : "default"}
+        onClick={handleJoinClick}
+        _hover={inviteUrl ? { textDecoration: "underline" } : {}}
+      >
         {" > "} press ENTER to join
       </Text>
     </Card.Root>
