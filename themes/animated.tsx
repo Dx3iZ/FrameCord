@@ -39,13 +39,6 @@ export default function AnimatedTheme({
   themeMode = "dark",
   inviteUrl,
 }: ThemeProps) {
-  
-  const handleJoinClick = () => {
-    if (inviteUrl) {
-      window.open(inviteUrl, "_blank", "noopener,noreferrer")
-    }
-  }
-  
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -166,6 +159,23 @@ export default function AnimatedTheme({
                   objectFit="cover"
                 />
               </Box>
+              {/* Animated ring */}
+              {/* <MotionBox
+                position="absolute"
+                inset={-2}
+                rounded={logoRadiusPx}
+                borderWidth="2px"
+                borderColor="whiteAlpha.400"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  opacity: [0.5, 0.2, 0.5],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              /> */}
             </MotionBox>
           )}
         </Box>
@@ -266,43 +276,67 @@ export default function AnimatedTheme({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.5 }}
       >
-        <Button
-          mt={4}
-          w="full"
-          size="md"
-          bg={accentColor}
-          color="white"
-          rounded={buttonRadiusPx}
-          _hover={{ 
-            bg: accentColor,
-            transform: "scale(1.02)",
-            boxShadow: `0 0 25px ${accentColor}70`,
-            _before: {
-              left: "100%",
-            },
-          }}
-          transition="all 0.2s"
-          fontWeight="700"
-          letterSpacing="0.05em"
-          textTransform="uppercase"
-          h="44px"
-          position="relative"
-          overflow="hidden"
-          onClick={handleJoinClick}
-          disabled={!inviteUrl}
-          _before={{
-            content: '""',
-            position: "absolute",
-            top: 0,
-            left: "-100%",
-            w: "100%",
-            h: "100%",
-            bgGradient: "linear(to-r, transparent, whiteAlpha.300, transparent)",
-            transition: "left 0.5s",
-          }}
-        >
-          Join Server
-        </Button>
+        {inviteUrl ? (
+          <Box
+            as="a"
+            href={inviteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            display="block"
+            mt={4}
+            _hover={{ textDecoration: "none" }}
+          >
+            <Button
+              w="full"
+              size="md"
+              bg={accentColor}
+              color="white"
+              rounded={buttonRadiusPx}
+              _hover={{
+                bg: accentColor,
+                transform: "scale(1.02)",
+                boxShadow: `0 0 25px ${accentColor}70`,
+                _before: { left: "100%" },
+              }}
+              transition="all 0.2s"
+              fontWeight="700"
+              letterSpacing="0.05em"
+              textTransform="uppercase"
+              h="44px"
+              position="relative"
+              overflow="hidden"
+              _before={{
+                content: '""',
+                position: "absolute",
+                top: 0,
+                left: "-100%",
+                w: "100%",
+                h: "100%",
+                bgGradient: "linear(to-r, transparent, whiteAlpha.300, transparent)",
+                transition: "left 0.5s",
+              }}
+            >
+              Join Server
+            </Button>
+          </Box>
+        ) : (
+          <Button
+            mt={4}
+            w="full"
+            size="md"
+            bg={accentColor}
+            color="white"
+            rounded={buttonRadiusPx}
+            _hover={{ bg: accentColor, transform: "scale(1.02)" }}
+            transition="all 0.2s"
+            fontWeight="700"
+            letterSpacing="0.05em"
+            textTransform="uppercase"
+            h="44px"
+          >
+            Join Server
+          </Button>
+        )}
       </MotionBox>
     </MotionBox>
   )

@@ -33,13 +33,6 @@ export default function GlassTheme({
   themeMode = "dark",
   inviteUrl,
 }: ThemeProps) {
-  
-  const handleJoinClick = () => {
-    if (inviteUrl) {
-      window.open(inviteUrl, "_blank", "noopener,noreferrer")
-    }
-  }
-  
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -227,38 +220,66 @@ export default function GlassTheme({
         </Stack>
       </HStack>
 
-      <Button
-        mt={4}
-        w="full"
-        size="md"
-        bg={accentColor}
-        color="white"
-        rounded={buttonRadiusPx}
-        _hover={{ 
-          bg: accentColor,
-          transform: "scale(1.02)",
-          boxShadow: `0 4px 20px ${accentColor}50`,
-        }}
-        transition="all 0.2s ease"
-        fontWeight="600"
-        letterSpacing="0.02em"
-        h="42px"
-        position="relative"
-        overflow="hidden"
-        onClick={handleJoinClick}
-        disabled={!inviteUrl}
-      >
+      {inviteUrl ? (
         <Box
-          position="absolute"
-          top={0}
-          left={0}
-          right={0}
-          h="50%"
-          bg="whiteAlpha.200"
-          pointerEvents="none"
-        />
-        <Text position="relative" zIndex={1}>Join Server</Text>
-      </Button>
+          as="a"
+          href={inviteUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          display="block"
+          mt={4}
+          _hover={{ textDecoration: "none" }}
+        >
+          <Button
+            w="full"
+            size="md"
+            bg={accentColor}
+            color="white"
+            rounded={buttonRadiusPx}
+            _hover={{
+              bg: accentColor,
+              transform: "scale(1.02)",
+              boxShadow: `0 4px 20px ${accentColor}50`,
+            }}
+            transition="all 0.2s ease"
+            fontWeight="600"
+            letterSpacing="0.02em"
+            h="42px"
+            position="relative"
+            overflow="hidden"
+          >
+            <Box
+              position="absolute"
+              top={0}
+              left={0}
+              right={0}
+              h="50%"
+              bg="whiteAlpha.200"
+              pointerEvents="none"
+            />
+            <Text position="relative" zIndex={1}>Join Server</Text>
+          </Button>
+        </Box>
+      ) : (
+        <Button
+          mt={4}
+          w="full"
+          size="md"
+          bg={accentColor}
+          color="white"
+          rounded={buttonRadiusPx}
+          _hover={{ bg: accentColor, transform: "scale(1.02)" }}
+          transition="all 0.2s ease"
+          fontWeight="600"
+          letterSpacing="0.02em"
+          h="42px"
+          position="relative"
+          overflow="hidden"
+        >
+          <Box position="absolute" top={0} left={0} right={0} h="50%" bg="whiteAlpha.200" pointerEvents="none" />
+          <Text position="relative" zIndex={1}>Join Server</Text>
+        </Button>
+      )}
     </Box>
   )
 }

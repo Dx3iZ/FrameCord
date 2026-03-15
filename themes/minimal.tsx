@@ -33,12 +33,6 @@ export default function MinimalTheme({
   themeMode = "dark",
   inviteUrl,
 }: ThemeProps) {
-  
-  const handleJoinClick = () => {
-    if (inviteUrl) {
-      window.open(inviteUrl, "_blank", "noopener,noreferrer")
-    }
-  }
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -192,27 +186,57 @@ export default function MinimalTheme({
         </Stack>
       </HStack>
 
-      <Button
-        mt={4}
-        w="full"
-        size="md"
-        bg={accentColor}
-        color="white"
-        rounded={buttonRadiusPx}
-        _hover={{ 
-          opacity: 0.9, 
-          transform: "scale(1.01)",
-          boxShadow: `0 4px 15px ${accentColor}40`
-        }}
-        transition="all 0.2s ease"
-        fontWeight="600"
-        letterSpacing="0.02em"
-        h="40px"
-        onClick={handleJoinClick}
-        disabled={!inviteUrl}
-      >
-        Join Server
-      </Button>
+      {inviteUrl ? (
+        <Box
+          as="a"
+          href={inviteUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          display="block"
+          mt={4}
+          w={"full"}
+          _hover={{ textDecoration: "none" }}
+        >
+          <Button
+            w="full"
+            size="md"
+            bg={accentColor}
+            color="white"
+            rounded={buttonRadiusPx}
+            _hover={{
+              opacity: 0.9,
+              transform: "scale(1.01)",
+              boxShadow: `0 4px 15px ${accentColor}40`,
+            }}
+            transition="all 0.2s ease"
+            fontWeight="600"
+            letterSpacing="0.02em"
+            h="40px"
+          >
+            Join Server
+          </Button>
+        </Box>
+      ) : (
+        <Button
+          mt={4}
+          w="full"
+          size="md"
+          bg={accentColor}
+          color="white"
+          rounded={buttonRadiusPx}
+          _hover={{
+            opacity: 0.9,
+            transform: "scale(1.01)",
+            boxShadow: `0 4px 15px ${accentColor}40`,
+          }}
+          transition="all 0.2s ease"
+          fontWeight="600"
+          letterSpacing="0.02em"
+          h="40px"
+        >
+          Join Server
+        </Button>
+      )}
     </Box>
   )
 }

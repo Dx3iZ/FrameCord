@@ -33,13 +33,6 @@ export default function FrostTheme({
   themeMode = "dark",
   inviteUrl,
 }: ThemeProps) {
-  
-  const handleJoinClick = () => {
-    if (inviteUrl) {
-      window.open(inviteUrl, "_blank", "noopener,noreferrer")
-    }
-  }
-  
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -191,26 +184,13 @@ export default function FrostTheme({
         </Stack>
       </HStack>
 
-      <Button
-        mt={4}
-        w="full"
-        size="md"
-        bg={accentColor}
-        color="white"
-        rounded={buttonRadiusPx}
-        _hover={{ 
-          bg: accentColor,
-          transform: "scale(1.02)",
-          boxShadow: `0 4px 20px ${accentColor}60`,
-        }}
-        transition="all 0.2s ease"
-        fontWeight="600"
-        h="40px"
-        onClick={handleJoinClick}
-        disabled={!inviteUrl}
-      >
-        ❄️ Join Server
-      </Button>
+      {inviteUrl ? (
+        <Box as="a" href={inviteUrl} target="_blank" rel="noopener noreferrer" display="block" mt={4} _hover={{ textDecoration: "none" }}>
+          <Button w="full" size="md" bg={accentColor} color="white" rounded={buttonRadiusPx} _hover={{ bg: accentColor, transform: "scale(1.02)", boxShadow: `0 4px 20px ${accentColor}60` }} transition="all 0.2s ease" fontWeight="600" h="40px">❄️ Join Server</Button>
+        </Box>
+      ) : (
+        <Button mt={4} w="full" size="md" bg={accentColor} color="white" rounded={buttonRadiusPx} _hover={{ bg: accentColor, transform: "scale(1.02)" }} transition="all 0.2s ease" fontWeight="600" h="40px">❄️ Join Server</Button>
+      )}
     </Box>
   )
 }

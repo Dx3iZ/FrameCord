@@ -35,12 +35,6 @@ export default function NeonTheme({
   themeMode = "dark",
   inviteUrl,
 }: ThemeProps) {
-  
-  const handleJoinClick = () => {
-    if (inviteUrl) {
-      window.open(inviteUrl, "_blank", "noopener,noreferrer")
-    }
-  }
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -150,26 +144,49 @@ export default function NeonTheme({
       </HStack>
       </Card.Body>
       <Card.Footer zIndex={3} p={4}>
-      <Button
-        w="full"
-        size="sm"
-        bg={buttonColor}
-        color="white"
-        rounded={buttonRadiusPx}
-        _hover={{ 
-          bg: `${buttonColor}dd`,
-          boxShadow: `0 0 20px ${buttonColor}60`,
-          transform: "scale(1.02)"
-        }}
-        transition="all 0.2s"
-        fontWeight="semibold"
-        textTransform="uppercase"
-        letterSpacing="wide"
-        onClick={handleJoinClick}
-        disabled={!inviteUrl}
-      >
-        Join Server
-      </Button>
+      {inviteUrl ? (
+        <Box
+          as="a"
+          href={inviteUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          display="block"
+          w={"full"}
+          _hover={{ textDecoration: "none" }}
+        >
+          <Button
+            w="full"
+            size="sm"
+            bg={buttonColor}
+            color="white"
+            rounded={buttonRadiusPx}
+            _hover={{
+              bg: `${buttonColor}dd`,
+              boxShadow: `0 0 20px ${buttonColor}60`,
+              transform: "scale(1.02)",
+            }}
+            transition="all 0.2s"
+            fontWeight="semibold"
+            textTransform="uppercase"
+            letterSpacing="wide"
+          >
+            Join Server
+          </Button>
+        </Box>
+      ) : (
+        <Button
+          w="full"
+          size="sm"
+          bg={buttonColor}
+          color="white"
+          rounded={buttonRadiusPx}
+          fontWeight="semibold"
+          textTransform="uppercase"
+          letterSpacing="wide"
+        >
+          Join Server
+        </Button>
+      )}
       </Card.Footer>
     </Card.Root>
   )

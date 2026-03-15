@@ -33,13 +33,6 @@ export default function TerminalTheme({
   themeMode = "dark",
   inviteUrl,
 }: ThemeProps) {
-  
-  const handleJoinClick = () => {
-    if (inviteUrl) {
-      window.open(inviteUrl, "_blank", "noopener,noreferrer")
-    }
-  }
-  
   const logoRadiusPx = `${logoRadius}px`
   const cardRadiusPx = `${cardRadius}px`
   
@@ -101,15 +94,26 @@ export default function TerminalTheme({
         </Stack>
       </HStack>
 
-      <Text 
-        mt={3} 
-        fontSize="xs" 
-        cursor={inviteUrl ? "pointer" : "default"}
-        onClick={handleJoinClick}
-        _hover={inviteUrl ? { textDecoration: "underline" } : {}}
-      >
-        {" > "} press ENTER to join
-      </Text>
+      {inviteUrl ? (
+        <Text mt={3} fontSize="xs">
+          {" > "}{" "}
+          <Text
+            as="a"
+            href={inviteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            color={buttonColor}
+            textDecoration="underline"
+            _hover={{ opacity: 0.9 }}
+          >
+            press ENTER to join
+          </Text>
+        </Text>
+      ) : (
+        <Text mt={3} fontSize="xs">
+          {" > "} press ENTER to join
+        </Text>
+      )}
     </Card.Root>
   )
 }

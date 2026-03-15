@@ -2,7 +2,6 @@ export type ThemeName = "neon" | "minimal" | "animated" | "glass" | "terminal" |
 
 export type AppConfig = {
   invite?: string
-  inviteCode?: string
   theme?: ThemeName
   themeMode?: "dark" | "light"
   showIcon?: boolean

@@ -53,19 +53,19 @@ export default function Content({}) {
         
         const cleaned = input.trim();
         
-        // Already just the code (including special codes like "discord")
-        if (/^[a-zA-Z0-9]+$/.test(cleaned)) {
+        // Already just the code (Discord allows letters, numbers, underscore and hyphen)
+        if (/^[a-zA-Z0-9_-]+$/.test(cleaned)) {
             return cleaned;
         }
         
         // Full URL: discord.gg/code or discord.com/invite/code
-        const urlMatch = cleaned.match(/(?:discord\.gg\/|discord\.com\/invite\/)([a-zA-Z0-9]+)/i);
+        const urlMatch = cleaned.match(/(?:discord\.gg\/|discord\.com\/invite\/)([a-zA-Z0-9_-]+)/);
         if (urlMatch) {
             return urlMatch[1];
         }
         
         // URL with path
-        const pathMatch = cleaned.match(/\/invite\/([a-zA-Z0-9]+)/i);
+        const pathMatch = cleaned.match(/\/invite\/([a-zA-Z0-9_-]+)/);
         if (pathMatch) {
             return pathMatch[1];
         }
@@ -73,10 +73,9 @@ export default function Content({}) {
         return null;
     }, []);
 
-    // Validate invite code - more permissive for special codes
+    // Validate invite code
     const validateInvite = useCallback((code: string): string | null => {
         if (!code) return null;
-        // Allow alphanumeric, underscores, hyphens, and common special codes
         if (!/^[a-zA-Z0-9_-]+$/.test(code)) return null;
         if (code.length < 2) return null;
         return code;
@@ -341,6 +340,7 @@ export default function Content({}) {
                             <WidgetPreview
                                 data={data}
                                 theme={theme}
+                                inviteCode={data ? ((shareCode || extractInviteCode(invite)) ?? undefined) : undefined}
                                 showIcon={showIcon}
                                 showMembers={showMembers}
                                 showOnline={showOnline}

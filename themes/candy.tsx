@@ -33,13 +33,6 @@ export default function CandyTheme({
   themeMode = "dark",
   inviteUrl,
 }: ThemeProps) {
-  
-  const handleJoinClick = () => {
-    if (inviteUrl) {
-      window.open(inviteUrl, "_blank", "noopener,noreferrer")
-    }
-  }
-  
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -173,27 +166,13 @@ export default function CandyTheme({
         </Stack>
       </HStack>
 
-      <Button
-        mt={4}
-        w="full"
-        size="md"
-        bg="white"
-        color={accentColor}
-        rounded={buttonRadiusPx}
-        _hover={{ 
-          bg: "white",
-          transform: "scale(1.02)",
-          boxShadow: "0 8px 25px rgba(236, 72, 153, 0.4)",
-        }}
-        transition="all 0.2s ease"
-        fontWeight="700"
-        letterSpacing="0.05em"
-        h="42px"
-        onClick={handleJoinClick}
-        disabled={!inviteUrl}
-      >
-        ✨ Join Server ✨
-      </Button>
+      {inviteUrl ? (
+        <Box as="a" href={inviteUrl} target="_blank" rel="noopener noreferrer" display="block" mt={4} _hover={{ textDecoration: "none" }}>
+          <Button w="full" size="md" bg="white" color={accentColor} rounded={buttonRadiusPx} _hover={{ bg: "white", transform: "scale(1.02)", boxShadow: "0 8px 25px rgba(236, 72, 153, 0.4)" }} transition="all 0.2s ease" fontWeight="700" letterSpacing="0.05em" h="42px">✨ Join Server ✨</Button>
+        </Box>
+      ) : (
+        <Button mt={4} w="full" size="md" bg="white" color={accentColor} rounded={buttonRadiusPx} _hover={{ bg: "white", transform: "scale(1.02)" }} transition="all 0.2s ease" fontWeight="700" letterSpacing="0.05em" h="42px">✨ Join Server ✨</Button>
+      )}
     </Box>
   )
 }

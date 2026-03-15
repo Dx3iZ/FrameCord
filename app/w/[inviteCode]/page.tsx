@@ -28,11 +28,6 @@ export default async function WidgetPage({ params, searchParams }: PageProps) {
   const effectiveInvite = config?.invite || inviteCode
 
   const data = await fetchInvite(effectiveInvite).catch(() => null)
-  
-  // Build the invite URL for the join button - use user's provided invite code (from config or URL param)
-  // This preserves vanity URLs and custom invite codes
-  const userInviteCode = config?.inviteCode || effectiveInvite
-  const inviteUrl = data?.instant_invite || `https://discord.gg/${userInviteCode}`
 
   return (
     <div
@@ -48,6 +43,7 @@ export default async function WidgetPage({ params, searchParams }: PageProps) {
       <WidgetPreview
         data={data}
         theme={config?.theme || "neon"}
+        inviteCode={effectiveInvite}
         showIcon={config?.showIcon ?? true}
         showMembers={config?.showMembers ?? true}
         showOnline={config?.showOnline ?? true}
@@ -60,7 +56,6 @@ export default async function WidgetPage({ params, searchParams }: PageProps) {
         cardRadius={config?.cardRadius ?? 12}
         buttonColor={config?.buttonColor}
         themeMode={config?.themeMode ?? "dark"}
-        inviteUrl={inviteUrl}
       />
     </div>
   )

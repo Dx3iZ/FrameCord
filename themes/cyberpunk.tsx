@@ -33,13 +33,6 @@ export default function CyberpunkTheme({
   themeMode = "dark",
   inviteUrl,
 }: ThemeProps) {
-  
-  const handleJoinClick = () => {
-    if (inviteUrl) {
-      window.open(inviteUrl, "_blank", "noopener,noreferrer")
-    }
-  }
-  
   const logoRadiusPx = `${logoRadius}px`
   const buttonRadiusPx = `${buttonRadius}px`
   const cardRadiusPx = `${cardRadius}px`
@@ -146,27 +139,13 @@ export default function CyberpunkTheme({
         </HStack>
       </Card.Body>
       <Card.Footer zIndex={3} p={4}>
-        <Button
-          w="full"
-          size="sm"
-          bg={buttonColor}
-          color={themeMode === "light" ? "white" : "black"}
-          rounded={buttonRadiusPx}
-          _hover={{ 
-            opacity: 0.8, 
-            boxShadow: `0 0 25px ${buttonColor}`,
-            transform: "scale(1.02)"
-          }}
-          transition="all 0.2s"
-          fontFamily="mono"
-          textTransform="uppercase"
-          letterSpacing="wider"
-          fontWeight="bold"
-          onClick={handleJoinClick}
-          disabled={!inviteUrl}
-        >
-          Join Server
-        </Button>
+        {inviteUrl ? (
+          <Box w={"full"} as="a" href={inviteUrl} target="_blank" rel="noopener noreferrer" display="block" _hover={{ textDecoration: "none" }}>
+            <Button w="full" size="sm" bg={buttonColor} color={themeMode === "light" ? "white" : "black"} rounded={buttonRadiusPx} _hover={{ opacity: 0.8, boxShadow: `0 0 25px ${buttonColor}`, transform: "scale(1.02)" }} transition="all 0.2s" fontFamily="mono" textTransform="uppercase" letterSpacing="wider" fontWeight="bold">Join Server</Button>
+          </Box>
+        ) : (
+          <Button w="full" size="sm" bg={buttonColor} color={themeMode === "light" ? "white" : "black"} rounded={buttonRadiusPx} _hover={{ opacity: 0.8, transform: "scale(1.02)" }} transition="all 0.2s" fontFamily="mono" textTransform="uppercase" letterSpacing="wider" fontWeight="bold">Join Server</Button>
+        )}
       </Card.Footer>
     </Card.Root>
   )
