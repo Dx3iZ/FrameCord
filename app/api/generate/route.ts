@@ -74,6 +74,17 @@ export async function GET(request: NextRequest) {
     const buttonRadius = Math.min(24, Math.max(0, parseInt(searchParams.get("buttonRadius") || String(defaultConfig.buttonRadius), 10)));
     const cardRadius = Math.min(24, Math.max(0, parseInt(searchParams.get("cardRadius") || String(defaultConfig.cardRadius), 10)));
     const buttonColor = searchParams.get("buttonColor") || defaultConfig.buttonColor;
+    
+    // Get format parameter (json or live)
+    const format = (searchParams.get("format") || "json") as "json" | "live";
+    
+    // Validate format
+    if (format !== "json" && format !== "live") {
+      return NextResponse.json(
+        { error: true, message: "Format must be 'json' or 'live'", code: "INVALID_FORMAT" },
+        { status: 400 }
+      );
+    }
 
     // Validate theme
     if (!validThemes.includes(theme)) {
@@ -128,7 +139,12 @@ export async function GET(request: NextRequest) {
     const baseUrl = `${request.nextUrl.protocol}//${request.nextUrl.host}`;
     const fullUrl = `${baseUrl}${widgetPath}`;
 
-    // Generate embed code
+    // If format is "live", redirect directly to the preview URL
+    if (format === "live") {
+      return NextResponse.redirect(fullUrl);
+    }
+
+    // Default: json format - return full JSON response
     const embedCode = `<iframe src="${fullUrl}" width="460" height="220" frameborder="0" allowtransparency="true"></iframe>`;
 
     return NextResponse.json({
@@ -144,6 +160,7 @@ export async function GET(request: NextRequest) {
           invite: "Discord invite code (REQUIRED)",
           theme: `Theme name (default: ${defaultConfig.theme})`,
           themeMode: "dark or light (default: dark)",
+          format: "Response format: 'json' (default) returns JSON, 'live' redirects to preview",
           showIcon: "true or false",
           showMembers: "true or false",
           showOnline: "true or false",
@@ -159,6 +176,8 @@ export async function GET(request: NextRequest) {
         example: {
           full: `${baseUrl}/api/generate?invite=abc123&theme=neon&themeMode=dark`,
           minimal: `${baseUrl}/api/generate?invite=abc123&theme=ocean`,
+          live: `${baseUrl}/api/generate?invite=abc123&theme=ocean&format=live`,
+          markdown: `[![Discord Widget](${baseUrl}/api/generate?invite=abc123&theme=ocean&format=live)](${baseUrl}/w/abc123)`,
         },
       },
     });

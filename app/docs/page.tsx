@@ -53,7 +53,7 @@ export default function DocsPage() {
           <div style={{ marginBottom: "1rem" }}>
             <p style={{ fontWeight: "bold", marginBottom: "0.5rem" }}>Endpoint:</p>
             <code style={{ background: "var(--chakra-colors-bg-subtle)", padding: "0.75rem", borderRadius: "0.5rem", display: "block", wordBreak: "break-all" }}>
-              https://framecord.dev/api/generate
+              https://framecord.vercel.app/api/generate
             </code>
           </div>
 
@@ -86,6 +86,12 @@ export default function DocsPage() {
                   <td style={{ padding: "0.5rem" }}>string</td>
                   <td style={{ padding: "0.5rem" }}>dark</td>
                   <td style={{ padding: "0.5rem" }}>Theme mode (dark, light)</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--chakra-colors-border)" }}>
+                  <td style={{ padding: "0.5rem" }}><code>format</code></td>
+                  <td style={{ padding: "0.5rem" }}>string</td>
+                  <td style={{ padding: "0.5rem" }}>json</td>
+                  <td style={{ padding: "0.5rem" }}>Response format: <code>json</code> returns JSON, <code>live</code> redirects to preview URL (for markdown)</td>
                 </tr>
                 <tr style={{ borderBottom: "1px solid var(--chakra-colors-border)" }}>
                   <td style={{ padding: "0.5rem" }}><code>showIcon</code></td>
@@ -160,14 +166,28 @@ export default function DocsPage() {
           <div style={{ marginBottom: "1rem" }}>
             <p style={{ fontWeight: "bold", marginBottom: "0.5rem" }}>Example Usage - Full:</p>
             <code style={{ background: "var(--chakra-colors-bg-subtle)", padding: "0.75rem", borderRadius: "0.5rem", display: "block", wordBreak: "break-all", fontSize: "0.8rem" }}>
-              https://framecord.dev/api/generate?invite=abc123&theme=ocean&themeMode=dark&showBanner=true&buttonColor=#10b981
+              https://framecord.vercel.app/api/generate?invite=abc123&theme=ocean&themeMode=dark&showBanner=true&buttonColor=#10b981
             </code>
           </div>
 
           <div style={{ marginBottom: "1rem" }}>
             <p style={{ fontWeight: "bold", marginBottom: "0.5rem" }}>Example Usage - Minimal:</p>
             <code style={{ background: "var(--chakra-colors-bg-subtle)", padding: "0.75rem", borderRadius: "0.5rem", display: "block", wordBreak: "break-all", fontSize: "0.8rem" }}>
-              https://framecord.dev/api/generate?invite=abc123&theme=aurora
+              https://framecord.vercel.app/api/generate?invite=abc123&theme=aurora
+            </code>
+          </div>
+
+          <div style={{ marginBottom: "1rem" }}>
+            <p style={{ fontWeight: "bold", marginBottom: "0.5rem" }}>Example Usage - Live Format (for Markdown/README):</p>
+            <code style={{ background: "var(--chakra-colors-bg-subtle)", padding: "0.75rem", borderRadius: "0.5rem", display: "block", wordBreak: "break-all", fontSize: "0.8rem" }}>
+              https://framecord.vercel.app/api/generate?invite=abc123&theme=ocean&format=live
+            </code>
+          </div>
+
+          <div style={{ marginBottom: "1rem" }}>
+            <p style={{ fontWeight: "bold", marginBottom: "0.5rem" }}>Markdown Embed Example (GitHub/GitLab):</p>
+            <code style={{ background: "var(--chakra-colors-bg-subtle)", padding: "0.75rem", borderRadius: "0.5rem", display: "block", wordBreak: "break-all", fontSize: "0.8rem" }}>
+              [![Discord Widget](https://framecord.vercel.app/api/generate?invite=abc123&theme=ocean&format=live)](https://framecord.vercel.app/w/abc123)
             </code>
           </div>
 
@@ -180,7 +200,7 @@ export default function DocsPage() {
   "previewUrl": "https://.../w/abc123?c=...",
   "config": { ... },
   "widgetPath": "/w/abc123?c=...",
-  "baseUrl": "https://framecord.dev",
+  "baseUrl": "https://framecord.vercel.app",
   "usage": { ... }
 }`}
             </pre>
@@ -197,7 +217,7 @@ export default function DocsPage() {
           <div style={{ marginBottom: "1rem" }}>
             <p style={{ fontWeight: "bold", marginBottom: "0.5rem" }}>Endpoint:</p>
             <code style={{ background: "var(--chakra-colors-bg-subtle)", padding: "0.75rem", borderRadius: "0.5rem", display: "block", wordBreak: "break-all" }}>
-              https://framecord.dev/api/server?id=&#123;SERVER_ID&#125;
+              https://framecord.vercel.app/api/server?id=&#123;SERVER_ID&#125;
             </code>
           </div>
 
@@ -227,7 +247,7 @@ export default function DocsPage() {
           <div>
             <p style={{ fontWeight: "bold", marginBottom: "0.5rem" }}>Endpoint:</p>
             <code style={{ background: "var(--chakra-colors-bg-subtle)", padding: "0.75rem", borderRadius: "0.5rem", display: "block", marginBottom: "1rem" }}>
-              https://framecord.dev/api/themes
+              https://framecord.vercel.app/api/themes
             </code>
           </div>
         </div>

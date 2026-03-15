@@ -58,7 +58,21 @@ FrameCord provides API endpoints for programmatic usage:
 
 ### Generate Embed Code
 ```
-GET /api/generate?invite={inviteCode}&theme={themeName}&themeMode={dark|light}&...
+GET /api/generate?invite={inviteCode}&theme={themeName}&themeMode={dark|light}&format={json|live}&...
+```
+
+**Format Parameter:**
+- `json` (default) - Returns a JSON response with embed code, preview URL, and configuration
+- `live` - Redirects directly to the preview URL, useful for embedding in markdown files
+
+**Example - JSON Format:**
+```
+https://framecord.dev/api/generate?invite=discord&theme=neon
+```
+
+**Example - Live Format (for GitHub/GitLab README):**
+```markdown
+[![Discord Widget](https://framecord.dev/api/generate?invite=discord&theme=neon&format=live)](https://framecord.dev/w/discord)
 ```
 
 ### Get Server Info
