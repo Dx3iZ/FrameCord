@@ -166,23 +166,6 @@ export default function AnimatedTheme({
                   objectFit="cover"
                 />
               </Box>
-              {/* Animated ring */}
-              {/* <MotionBox
-                position="absolute"
-                inset={-2}
-                rounded={logoRadiusPx}
-                borderWidth="2px"
-                borderColor="whiteAlpha.400"
-                animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.5, 0.2, 0.5],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              /> */}
             </MotionBox>
           )}
         </Box>

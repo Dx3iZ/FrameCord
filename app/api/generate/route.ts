@@ -120,7 +120,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Create config object
+    // Create config object - preserve original invite for the join button
     const config = {
       theme,
       themeMode,
@@ -135,6 +135,7 @@ export async function GET(request: NextRequest) {
       buttonRadius,
       cardRadius,
       buttonColor,
+      inviteCode: inviteCode,
     };
 
     // Encode config to base64
